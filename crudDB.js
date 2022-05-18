@@ -35,11 +35,18 @@ app.get("/", (req, res) => res.send("Up and running..."));
 // Route: /create-table => To create the tables
 app.get("/create-table", (req, res) => {
 	// Putting Query on a variable
-	let name = `CREATE TABLE if not exists customers(customer_id int auto_increment, name VARCHAR(255) not null, PRIMARY KEY (customer_id))`;
+	let name = `CREATE TABLE if not exists customers
+	(customer_id int auto_increment, name VARCHAR(255)
+	 not null, PRIMARY KEY (customer_id))`;
 
 	let address = `CREATE TABLE if not exists address(address_id int auto_increment, customer_id int(11) not null, address VARCHAR(255) not null, PRIMARY KEY (address_id), FOREIGN KEY (customer_id) REFERENCES customers (customer_id))`;
 
-	let company = `CREATE TABLE if not exists company(company_id int auto_increment, customer_id int(11) not null, company VARCHAR(255) not null, PRIMARY KEY (company_id), FOREIGN KEY (customer_id) REFERENCES customers (customer_id))`;
+	let company = `CREATE TABLE if not exists
+	 company(company_id int auto_increment,
+		 customer_id int(11) not null, company 
+		 VARCHAR(255) not null, PRIMARY KEY 
+		 (company_id), FOREIGN KEY (customer_id) 
+		 REFERENCES customers (customer_id))`;
 
 	// Executing the query's we wrote above
 	connection.query(name, (err, results, fields) => {
